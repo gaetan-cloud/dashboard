@@ -54,6 +54,8 @@
   }
   nav button:hover { color: var(--white); }
   nav button.active { color: var(--orange); border-bottom-color: var(--orange); }
+  nav button.btn-yellow.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+  nav button.btn-yellow:hover { color: var(--yellow); }
 
   /* ── PAGES ── */
   .page { display: none; padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
@@ -214,7 +216,7 @@
 </header>
 
 <nav>
-  <button class="active" onclick="showPage('overview')">Vue d'ensemble</button>
+  <button class="btn-yellow active" onclick="showPage('overview')">Vue d'ensemble</button>
   <button onclick="showPage('commercial')">Accompagnement commercial</button>
   <button onclick="showPage('newsletters')">NL participations</button>
   <button onclick="showPage('events')">Événements</button>
