@@ -54,8 +54,6 @@
   }
   nav button:hover { color: var(--white); }
   nav button.active { color: var(--orange); border-bottom-color: var(--orange); }
-  nav button.btn-yellow.active { color: var(--yellow); border-bottom-color: var(--yellow); }
-  nav button.btn-yellow:hover { color: var(--yellow); }
 
   /* ── PAGES ── */
   .page { display: none; padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
@@ -212,11 +210,11 @@
     </div>
     <span class="logo-name">asterion</span>
   </div>
-  <div class="header-date">Dashboard Accompagnement · 24 mars 2026</div>
+  <div class="header-date">Dashboard Accompagnement · 4 avril 2026</div>
 </header>
 
 <nav>
-  <button class="btn-yellow active" onclick="showPage('overview')">Vue d'ensemble</button>
+  <button class="active" onclick="showPage('overview')">Vue d'ensemble</button>
   <button onclick="showPage('commercial')">Accompagnement commercial</button>
   <button onclick="showPage('newsletters')">NL participations</button>
   <button onclick="showPage('events')">Événements</button>
@@ -232,19 +230,15 @@
       <div class="kpi-label">Start-ups accompagnées</div>
     </div>
     <div class="kpi" style="--kpi-color:var(--violet-lt)">
-      <div class="kpi-value">210</div>
+      <div class="kpi-value">208</div>
       <div class="kpi-label">Intros commerciales</div>
     </div>
     <div class="kpi" style="--kpi-color:var(--green)">
       <div class="kpi-value">8</div>
       <div class="kpi-label">Nouveaux clients générés</div>
     </div>
-    <div class="kpi" style="--kpi-color:var(--orange-lt)">
-      <div class="kpi-value">265</div>
-      <div class="kpi-label">NL reçues (total)</div>
-    </div>
     <div class="kpi" style="--kpi-color:var(--violet-lt)">
-      <div class="kpi-value">17</div>
+      <div class="kpi-value">19</div>
       <div class="kpi-label">Événements organisés</div>
     </div>
     <div class="kpi" style="--kpi-color:var(--green)">
@@ -341,6 +335,7 @@
       <option value="2025-12-01">Décembre 2025</option>
       <option value="2026-01-01">Janvier 2026</option>
       <option value="2026-02-01">Février 2026</option>
+      <option value="2026-03-01">Mars 2026</option>
     </select>
     <label style="margin-left:8px">Véhicule :</label>
     <select id="nl-fonds" onchange="renderNL()">
@@ -478,17 +473,19 @@ const COMMERCIAL = {
   byStartup: [
     {s:"Darwin",n:46},{s:"Orus",n:23},{s:"Klaro",n:19},{s:"Carbone Farmers",n:14},
     {s:"Billiv",n:12},{s:"Edonia",n:11},{s:"Enrise",n:9},{s:"Keenat",n:9},
-    {s:"Urbyn",n:9},{s:"Weefin",n:9},{s:"Ramdam",n:7},{s:"Circul'Egg",n:5},
-    {s:"Living Models",n:5},{s:"Allcolibri",n:4},{s:"Nelson",n:3}
+    {s:"Urbyn",n:9},{s:"Weefin",n:9},{s:"Ramdam",n:7},{s:"Living Models",n:6},
+    {s:"Nelson",n:6},{s:"Circul'Egg",n:5},{s:"Allcolibri",n:4},{s:"Spark",n:3},
+    {s:"Aktio",n:2},{s:"Argile",n:2},{s:"Bocoloco",n:2},{s:"Clear Fashion",n:2},
+    {s:"Everdye",n:2},{s:"Onima",n:2},{s:"Caeli",n:1},{s:"Fungu'it",n:1},{s:"Juvenile",n:1}
   ],
   byResultat: [
-    {r:"En attente",n:165},{r:"Opp. perdue",n:28},{r:"Nouveau client",n:8},{r:"Déjà client",n:2}
+    {r:"En attente",n:170},{r:"Opp. perdue",n:28},{r:"Nouveau client",n:8},{r:"Déjà client",n:2}
   ],
   byNature: [{r:"Blurb envoyé",n:106},{r:"Intro directe",n:92}],
   byMois: [
     {m:"Mars 25",n:19},{m:"Avr 25",n:25},{m:"Mai 25",n:38},{m:"Juin 25",n:9},
     {m:"Juil 25",n:26},{m:"Août 25",n:15},{m:"Sep 25",n:19},{m:"Oct 25",n:15},
-    {m:"Nov 25",n:6},{m:"Jan 26",n:15},{m:"Fév 26",n:4},{m:"Mars 26",n:12}
+    {m:"Nov 25",n:6},{m:"Jan 26",n:15},{m:"Fév 26",n:4},{m:"Mars 26",n:16},{m:"Avr 26",n:1}
   ]
 };
 
@@ -496,13 +493,14 @@ const NL_MONTHLY = [
   {key:"2025-05-01",label:"Mai 25",  total:25,recues:16,format_ok:11},
   {key:"2025-06-01",label:"Juin 25", total:25,recues:24,format_ok:14},
   {key:"2025-07-01",label:"Juil 25", total:25,recues:6, format_ok:3},
-  {key:"2025-08-01",label:"Août 25", total:26,recues:13,format_ok:8},
-  {key:"2025-09-01",label:"Sep 25",  total:24,recues:17,format_ok:13},
+  {key:"2025-08-01",label:"Août 25", total:25,recues:13,format_ok:8},
+  {key:"2025-09-01",label:"Sep 25",  total:25,recues:17,format_ok:13},
   {key:"2025-10-01",label:"Oct 25",  total:27,recues:19,format_ok:10},
   {key:"2025-11-01",label:"Nov 25",  total:28,recues:15,format_ok:11},
   {key:"2025-12-01",label:"Déc 25",  total:27,recues:18,format_ok:10},
-  {key:"2026-01-01",label:"Jan 26",  total:28,recues:19,format_ok:12},
-  {key:"2026-02-01",label:"Fév 26",  total:29,recues:14,format_ok:11},
+  {key:"2026-01-01",label:"Jan 26",  total:29,recues:20,format_ok:13},
+  {key:"2026-02-01",label:"Fév 26",  total:29,recues:15,format_ok:12},
+  {key:"2026-03-01",label:"Mars 26", total:30,recues:2, format_ok:0},
 ];
 
 const NL_DETAIL = [
@@ -741,11 +739,12 @@ const NL_DETAIL = [
   {startup:"All Colibri",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-09",format:"Format non respecté",alerte:"OK",fonds:[]},
   {startup:"Orus Energy",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-16",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
   {startup:"Spark",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-05",format:"Format respecté",alerte:"OK",fonds:["F1"]},
+  {startup:"Nelson",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-01",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Juvenile",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Bon dimanche",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-11",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Keenat",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Onima",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-17",format:"Format non respecté",alerte:"Retard",fonds:[]},
-  {startup:"Fungu'it",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
+  {startup:"Fungu'it",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-26",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
   {startup:"Qomon",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Bocoloco",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
   {startup:"EverDye",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
@@ -770,26 +769,57 @@ const NL_DETAIL = [
   {startup:"Aptimiz",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-16",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Spark",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
   {startup:"Enrise",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-19",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
+  {startup:"All Colibri",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Aptimiz",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"Argile",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
+  {startup:"Billiv",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
+  {startup:"Bocoloco",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"Bon dimanche",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Bubble Robotics",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Carbone Farmers",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Circul'Egg",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
+  {startup:"Clearfashion",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Darwin",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
+  {startup:"Diamfab",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
+  {startup:"Edonia",mois:"2026-03-01",moisLabel:"Mars 2026",date:"2026-04-03",format:"—",alerte:"OK",fonds:["F1","F1R"]},
+  {startup:"Enrise",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
+  {startup:"EverDye",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
+  {startup:"Fungu'it",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
+  {startup:"Futurail",mois:"2026-03-01",moisLabel:"Mars 2026",date:"2026-04-02",format:"—",alerte:"OK",fonds:[]},
+  {startup:"Juvenile",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Keenat",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Klaro",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
+  {startup:"Living Models",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Nelson",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Onima",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Orus Energy",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
+  {startup:"Qomon",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
+  {startup:"Ramdam Social",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"Spark",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"Urbyn",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"WeeFin",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
 ];
 
 const EVENTS = [
-  {nom:"Gestion de patrimoine",           type:"Lunch & Learn",        inscrits:12,presents:12,csat:null,  date:"06/03/2025"},
-  {nom:"Machine à leads prévisible",       type:"Club Sales",           inscrits:9, presents:9, csat:4.65, date:"01/04/2025"},
-  {nom:"Lobbying comme atout",             type:"Lunch & Learn",        inscrits:5, presents:5, csat:4.5,  date:"03/06/2025"},
-  {nom:"Soirée annuelle des cofondateurs", type:"Soirée des cofondateurs",inscrits:null,presents:30,csat:4.7,date:"20/05/2025"},
-  {nom:"Session de lancement CTO",         type:"Club CTO",             inscrits:12,presents:9, csat:null,  date:"25/06/2025"},
-  {nom:"Faire grandir ses équipes",        type:"Lunch & Learn",        inscrits:21,presents:9, csat:4.7,  date:"10/07/2025"},
-  {nom:"Feuille de route industrielle",    type:"Club CTO",             inscrits:9, presents:9, csat:5.0,  date:"09/09/2025"},
-  {nom:"Poser les bases du branding",      type:"Club CMO",             inscrits:10,presents:8, csat:null,  date:"17/09/2025"},
-  {nom:"Internalisation / cofacturing",    type:"Club CTO",             inscrits:9, presents:9, csat:4.0,  date:"09/10/2025"},
-  {nom:"#2 Session branding",              type:"Club CMO",             inscrits:10,presents:8, csat:null,  date:"Oct 2025"},
-  {nom:"Mise en service d'un pilote",      type:"Club CTO",             inscrits:6, presents:4, csat:4.0,  date:"06/11/2025"},
-  {nom:"Droit social",                     type:"Lunch & Learn",        inscrits:10,presents:3, csat:null,  date:"19/11/2025"},
-  {nom:"Soirée de Noël",                   type:"Soirée des cofondateurs",inscrits:30,presents:null,csat:null,date:"03/12/2025"},
-  {nom:"Offsite des cofondateurs",         type:"Offsite",              inscrits:null,presents:null,csat:null,date:"Déc 2025"},
-  {nom:"Club CMO — GEO, SEO et IA",        type:"Club CMO",             inscrits:12,presents:6, csat:null,  date:"14/01/2026"},
-  {nom:"#1 Session 2026 CTO",              type:"Club CTO",             inscrits:8, presents:6, csat:4.0,  date:"04/02/2026"},
-  {nom:"Vibe coding : 1ère version",       type:"Club CMO",             inscrits:6, presents:6, csat:null,  date:"24/03/2026"},
+  {nom:"Gestion de patrimoine",           type:"Lunch & Learn",           inscrits:12,presents:12,csat:null, date:"06/03/2025"},
+  {nom:"Machine à leads prévisible",       type:"Club Sales",              inscrits:9, presents:9, csat:4.65,date:"01/04/2025"},
+  {nom:"Soirée annuelle des cofondateurs", type:"Soirée des cofondateurs", inscrits:18,presents:30,csat:4.7, date:"20/05/2025"},
+  {nom:"Lobbying comme atout",             type:"Lunch & Learn",           inscrits:5, presents:5, csat:4.5, date:"03/06/2025"},
+  {nom:"Session de lancement CTO",         type:"Club CTO",                inscrits:12,presents:9, csat:null, date:"25/06/2025"},
+  {nom:"Faire grandir ses équipes",        type:"Lunch & Learn",           inscrits:21,presents:9, csat:4.7, date:"10/07/2025"},
+  {nom:"Feuille de route industrielle",    type:"Club CTO",                inscrits:9, presents:9, csat:5.0, date:"09/09/2025"},
+  {nom:"Poser les bases du branding",      type:"Club CMO",                inscrits:10,presents:8, csat:null, date:"17/09/2025"},
+  {nom:"Internalisation / cofacturing",    type:"Club CTO",                inscrits:9, presents:9, csat:4.0, date:"09/10/2025"},
+  {nom:"#2 Session branding",              type:"Club CMO",                inscrits:10,presents:8, csat:null, date:"Oct 2025"},
+  {nom:"Mise en service d'un pilote",      type:"Club CTO",                inscrits:6, presents:4, csat:4.0, date:"06/11/2025"},
+  {nom:"Droit social",                     type:"Lunch & Learn",           inscrits:10,presents:3, csat:null, date:"19/11/2025"},
+  {nom:"Soirée de Noël",                   type:"Soirée des cofondateurs", inscrits:30,presents:null,csat:null,date:"03/12/2025"},
+  {nom:"Offsite des cofondateurs",         type:"Offsite",                 inscrits:null,presents:null,csat:null,date:"Déc 2025"},
+  {nom:"Club CMO — GEO, SEO et IA",        type:"Club CMO",                inscrits:12,presents:6, csat:null, date:"14/01/2026"},
+  {nom:"#1 Session 2026 CTO",              type:"Club CTO",                inscrits:8, presents:6, csat:4.0, date:"04/02/2026"},
+  {nom:"Vibe coding : 1ère version",       type:"Club CMO",                inscrits:6, presents:6, csat:5.0, date:"24/03/2026"},
+  {nom:"Gestion du runway",                type:"Club CFO",                inscrits:22,presents:11,csat:3.3, date:"27/03/2026"},
+  {nom:"Club Sales — Ventes complexes",    type:"Club Sales",              inscrits:6, presents:6, csat:null, date:"03/04/2026"},
 ];
 
 const EM_DATA = [
