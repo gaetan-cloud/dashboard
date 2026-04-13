@@ -218,7 +218,7 @@
   <button onclick="showPage('commercial')">Accompagnement commercial</button>
   <button onclick="showPage('newsletters')">NL participations</button>
   <button onclick="showPage('events')">Événements</button>
-  <button onclick="showPage('board')">Entreprise à mission</button>
+  <button onclick="showPage('board')">Société à mission</button>
 </nav>
 
 <!-- ════════════════ OVERVIEW ════════════════ -->
@@ -230,8 +230,8 @@
       <div class="kpi-label">Start-ups accompagnées</div>
     </div>
     <div class="kpi" style="--kpi-color:var(--violet-lt)">
-      <div class="kpi-value">208</div>
-      <div class="kpi-label">Intros commerciales</div>
+      <div class="kpi-value">221</div>
+      <div class="kpi-label">Facilitations commerciales</div>
     </div>
     <div class="kpi" style="--kpi-color:var(--green)">
       <div class="kpi-value">8</div>
@@ -243,7 +243,7 @@
     </div>
     <div class="kpi" style="--kpi-color:var(--green)">
       <div class="kpi-value">15</div>
-      <div class="kpi-label">✅ Entreprise à mission</div>
+      <div class="kpi-label">✅ Société à mission</div>
     </div>
   </div>
 
@@ -253,14 +253,14 @@
       <canvas id="ov-resultats"></canvas>
     </div>
     <div class="card">
-      <div class="card-title">Entreprise à mission — statut des participations</div>
+      <div class="card-title">Société à mission — statut des participations</div>
       <canvas id="ov-em"></canvas>
     </div>
   </div>
 
   <div class="grid-2">
     <div class="card">
-      <div class="card-title">Intros commerciales par mois</div>
+      <div class="card-title">Facilitations commerciales par mois</div>
       <canvas id="ov-mois"></canvas>
     </div>
     <div class="card">
@@ -275,11 +275,11 @@
   <div class="page-title">Accompagnement <span>commercial</span></div>
   <div class="kpi-grid">
     <div class="kpi" style="--kpi-color:var(--orange)">
-      <div class="kpi-value">210</div>
+      <div class="kpi-value">221</div>
       <div class="kpi-label">Dossiers totaux</div>
     </div>
     <div class="kpi" style="--kpi-color:var(--yellow)">
-      <div class="kpi-value">165</div>
+      <div class="kpi-value">183</div>
       <div class="kpi-label">En attente</div>
     </div>
     <div class="kpi" style="--kpi-color:var(--green)">
@@ -307,12 +307,18 @@
   </div>
   <div class="grid-2">
     <div class="card">
-      <div class="card-title">Volume mensuel d'intros</div>
+      <div class="card-title">Facilitations commerciales par mois</div>
       <canvas id="comm-mois"></canvas>
     </div>
     <div class="card">
       <div class="card-title">Classement des start-ups</div>
       <ul class="hbar-list" id="comm-top"></ul>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Facilitations par référent intro</div>
+      <ul class="hbar-list" id="comm-referent"></ul>
     </div>
   </div>
 </div>
@@ -342,6 +348,10 @@
       <option value="all">Tous</option>
       <option value="F1">F1</option>
       <option value="F1R">F1R</option>
+      <option value="F2">F2</option>
+      <option value="F3 Inception">F3 Inception</option>
+      <option value="F3R">F3R</option>
+      <option value="F3 Scale">F3 Scale</option>
     </select>
   </div>
 
@@ -427,7 +437,7 @@
 
 <!-- ════════════════ BOARD / EM ════════════════ -->
 <div class="page" id="page-board">
-  <div class="page-title">Entreprise <span>à mission</span></div>
+  <div class="page-title">Société <span>à mission</span></div>
 
   <div class="kpi-grid">
     <div class="kpi" style="--kpi-color:var(--green)">
@@ -440,7 +450,7 @@
     </div>
     <div class="kpi" style="--kpi-color:var(--orange)">
       <div class="kpi-value">6</div>
-      <div class="kpi-label">⏳ À compléter</div>
+      <div class="kpi-label">⏳ A encore le temps</div>
     </div>
     <div class="kpi" style="--kpi-color:var(--red)">
       <div class="kpi-value">4</div>
@@ -479,13 +489,24 @@ const COMMERCIAL = {
     {s:"Everdye",n:2},{s:"Onima",n:2},{s:"Caeli",n:1},{s:"Fungu'it",n:1},{s:"Mongalet",n:1}
   ],
   byResultat: [
-    {r:"En attente",n:170},{r:"Opp. perdue",n:28},{r:"Nouveau client",n:8},{r:"Déjà client",n:2}
+    {r:"En attente",n:183},{r:"Opp. perdue",n:28},{r:"Nouveau client",n:8},{r:"Déjà client",n:2}
   ],
-  byNature: [{r:"Blurb envoyé",n:106},{r:"Intro directe",n:92}],
+  byNature: [{r:"Blurb envoyé",n:122},{r:"Intro directe",n:94}],
   byMois: [
-    {m:"Mars 25",n:19},{m:"Avr 25",n:25},{m:"Mai 25",n:38},{m:"Juin 25",n:9},
-    {m:"Juil 25",n:26},{m:"Août 25",n:15},{m:"Sep 25",n:19},{m:"Oct 25",n:15},
-    {m:"Nov 25",n:6},{m:"Jan 26",n:15},{m:"Fév 26",n:4},{m:"Mars 26",n:16},{m:"Avr 26",n:1}
+    {m:"Mars 25",n:19,blurb:9,intro:8},{m:"Avr 25",n:25,blurb:22,intro:1},
+    {m:"Mai 25",n:38,blurb:16,intro:21},{m:"Juin 25",n:9,blurb:7,intro:2},
+    {m:"Juil 25",n:26,blurb:9,intro:17},{m:"Août 25",n:15,blurb:9,intro:6},
+    {m:"Sep 25",n:19,blurb:5,intro:14},{m:"Oct 25",n:15,blurb:14,intro:1},
+    {m:"Nov 25",n:6,blurb:2,intro:4},{m:"Jan 26",n:15,blurb:7,intro:8},
+    {m:"Fév 26",n:4,blurb:2,intro:2},{m:"Mars 26",n:24,blurb:14,intro:10},
+    {m:"Avr 26",n:6,blurb:6,intro:0}
+  ],
+  byReferent: [
+    {r:"Stéphane",n:121},{r:"Charly",n:23},{r:"Gaetan",n:13},{r:"Antonin",n:6},
+    {r:"Benjamin Lineage",n:5},{r:"Nathalie Dubiez",n:3},{r:"Manon",n:3},
+    {r:"Jérémie Bugard",n:2},{r:"Marie-Anne Aymerich",n:2},{r:"Julien",n:2},
+    {r:"Gerald Maradan",n:2},{r:"Anne Cabotin",n:2},{r:"Philippe",n:2},
+    {r:"Jean Mortier",n:2},{r:"Louise",n:2},{r:"Arnaud Bouffard",n:2}
   ]
 };
 
@@ -505,7 +526,7 @@ const NL_MONTHLY = [
 
 const NL_DETAIL = [
   {startup:"Edonia",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-13",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
-  {startup:"Spark",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-23",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
+  {startup:"Spark",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-23",format:"Format non respecté",alerte:"Retard",fonds:["F1", "F3 Scale"]},
   {startup:"Diamfab",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-13",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Orus Energy",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-24",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
   {startup:"Darwin",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-18",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
@@ -516,11 +537,11 @@ const NL_DETAIL = [
   {startup:"Circul'Egg",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-13",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Fungu'it",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-18",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
   {startup:"Argile",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-17",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
-  {startup:"WeeFin",mois:"2025-05-01",moisLabel:"Mai 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"WeeFin",mois:"2025-05-01",moisLabel:"Mai 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Keenat",mois:"2025-05-01",moisLabel:"Mai 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Caeli Energie",mois:"2025-05-01",moisLabel:"Mai 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
-  {startup:"Carbone Farmers",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-13",format:"Format respecté",alerte:"OK",fonds:[]},
-  {startup:"EverDye",mois:"2025-05-01",moisLabel:"Mai 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"Carbone Farmers",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-13",format:"Format respecté",alerte:"OK",fonds:["F3 Scale"]},
+  {startup:"EverDye",mois:"2025-05-01",moisLabel:"Mai 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Qomon",mois:"2025-05-01",moisLabel:"Mai 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Enrise",mois:"2025-05-01",moisLabel:"Mai 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
   {startup:"Aptimiz",mois:"2025-05-01",moisLabel:"Mai 2025",date:"2025-06-15",format:"Format non respecté",alerte:"OK",fonds:["F1"]},
@@ -532,21 +553,21 @@ const NL_DETAIL = [
   {startup:"Circul'Egg",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-03",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Ramdam Social",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-18",format:"—",alerte:"Retard",fonds:["F1"]},
   {startup:"Onima",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-23",format:"Format non respecté",alerte:"Retard",fonds:[]},
-  {startup:"Spark",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-30",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
-  {startup:"Carbone Farmers",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-25",format:"Format respecté",alerte:"Retard",fonds:[]},
+  {startup:"Spark",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-30",format:"Format non respecté",alerte:"Retard",fonds:["F1", "F3 Scale"]},
+  {startup:"Carbone Farmers",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-25",format:"Format respecté",alerte:"Retard",fonds:["F3 Scale"]},
   {startup:"Caeli Energie",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-15",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Enrise",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-02",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Argile",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-15",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Aptimiz",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-15",format:"Format non respecté",alerte:"OK",fonds:["F1"]},
   {startup:"Klaro",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-18",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
-  {startup:"EverDye",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-17",format:"Format non respecté",alerte:"Retard",fonds:["F1", "F1R"]},
+  {startup:"EverDye",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-17",format:"Format non respecté",alerte:"Retard",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Darwin",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-11",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Qomon",mois:"2025-06-01",moisLabel:"Juin 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"All Colibri",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-07",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Clearfashion",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-03",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Edonia",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-07",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Orus Energy",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-15",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
-  {startup:"WeeFin",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-31",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
+  {startup:"WeeFin",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-31",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Billiv",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-15",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Urbyn",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-27",format:"Format respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Bon dimanche",mois:"2025-06-01",moisLabel:"Juin 2025",date:"2025-07-18",format:"Format non respecté",alerte:"Retard",fonds:[]},
@@ -558,21 +579,21 @@ const NL_DETAIL = [
   {startup:"Circul'Egg",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Aptimiz",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"2025-08-20",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Keenat",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Carbone Farmers",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Carbone Farmers",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Caeli Energie",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"All Colibri",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"2025-08-11",format:"Format non respecté",alerte:"OK",fonds:[]},
   {startup:"Ramdam Social",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
   {startup:"Klaro",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Qomon",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
-  {startup:"WeeFin",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"WeeFin",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Diamfab",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Darwin",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"2025-08-01",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Fungu'it",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
-  {startup:"EverDye",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"EverDye",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Clearfashion",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"2025-08-11",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Onima",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Urbyn",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
-  {startup:"Spark",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"Spark",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F3 Scale"]},
   {startup:"Bon dimanche",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Bocoloco",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
   {startup:"Argile",mois:"2025-07-01",moisLabel:"Juillet 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
@@ -582,18 +603,18 @@ const NL_DETAIL = [
   {startup:"Edonia",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-01",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Darwin",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-12",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Circul'Egg",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-03",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
-  {startup:"Carbone Farmers",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Carbone Farmers",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Enrise",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-11",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Caeli Energie",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Klaro",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-11",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
-  {startup:"EverDye",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"EverDye",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Orus Energy",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-15",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Qomon",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
-  {startup:"WeeFin",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"WeeFin",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Billiv",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Argile",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-16",format:"—",alerte:"Retard",fonds:["F1R"]},
   {startup:"Clearfashion",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Spark",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-05",format:"Format respecté",alerte:"OK",fonds:["F1"]},
+  {startup:"Spark",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-05",format:"Format respecté",alerte:"OK",fonds:["F1", "F3 Scale"]},
   {startup:"Caeli Energie",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Keenat",mois:"2025-08-01",moisLabel:"Août 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Ramdam Social",mois:"2025-08-01",moisLabel:"Août 2025",date:"2025-09-22",format:"—",alerte:"Retard",fonds:["F1"]},
@@ -608,11 +629,11 @@ const NL_DETAIL = [
   {startup:"Onima",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Fungu'it",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
   {startup:"Diamfab",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-23",format:"Format non respecté",alerte:"Retard",fonds:["F1", "F1R"]},
-  {startup:"EverDye",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-22",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
+  {startup:"EverDye",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-22",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Edonia",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-03",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Orus Energy",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-22",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
   {startup:"Keenat",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-24",format:"Format respecté",alerte:"Retard",fonds:[]},
-  {startup:"Spark",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-11-07",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
+  {startup:"Spark",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-11-07",format:"Format non respecté",alerte:"Retard",fonds:["F1", "F3 Scale"]},
   {startup:"Billiv",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-09-30",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Aptimiz",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-17",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Argile",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-27",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
@@ -622,11 +643,11 @@ const NL_DETAIL = [
   {startup:"Clearfashion",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Urbyn",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
   {startup:"Qomon",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-28",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
-  {startup:"WeeFin",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"WeeFin",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Darwin",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-14",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Bon dimanche",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Bocoloco",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
-  {startup:"Carbone Farmers",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-26",format:"Format respecté",alerte:"Retard",fonds:[]},
+  {startup:"Carbone Farmers",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-26",format:"Format respecté",alerte:"Retard",fonds:["F3 Scale"]},
   {startup:"Ramdam Social",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-20",format:"Format respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"All Colibri",mois:"2025-09-01",moisLabel:"Septembre 2025",date:"2025-10-23",format:"Format non respecté",alerte:"Retard",fonds:[]},
   {startup:"Klaro",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-13",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
@@ -634,94 +655,94 @@ const NL_DETAIL = [
   {startup:"Orus Energy",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-12",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Aptimiz",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-17",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Keenat",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Mongalet",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Bubble Robotics",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Mongalet",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
+  {startup:"Bubble Robotics",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Enrise",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-14",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Billiv",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-24",format:"Format non respecté",alerte:"Retard",fonds:["F1", "F1R"]},
   {startup:"Fungu'it",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-13",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"All Colibri",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-18",format:"Format non respecté",alerte:"Retard",fonds:[]},
   {startup:"Bocoloco",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-13",format:"Format non respecté",alerte:"OK",fonds:["F1"]},
-  {startup:"Carbone Farmers",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-10-26",format:"Format respecté",alerte:"OK",fonds:[]},
+  {startup:"Carbone Farmers",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-10-26",format:"Format respecté",alerte:"OK",fonds:["F3 Scale"]},
   {startup:"Onima",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Darwin",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-17",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
   {startup:"Circul'Egg",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-06",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
-  {startup:"Dotomics",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Dotomics",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale", "F3 Inception", "F3R"]},
   {startup:"Diamfab",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-18",format:"Format non respecté",alerte:"Retard",fonds:["F1", "F1R"]},
-  {startup:"Spark",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-07",format:"Format non respecté",alerte:"OK",fonds:["F1"]},
+  {startup:"Spark",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-07",format:"Format non respecté",alerte:"OK",fonds:["F1", "F3 Scale"]},
   {startup:"Clearfashion",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-10",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Urbyn",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
   {startup:"Qomon",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Ramdam Social",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-19",format:"Format respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Argile",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-27",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
-  {startup:"EverDye",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-10",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
-  {startup:"WeeFin",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"EverDye",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-10",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R", "F3 Scale"]},
+  {startup:"WeeFin",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Bon dimanche",mois:"2025-10-01",moisLabel:"Octobre 2025",date:"2025-11-07",format:"Format non respecté",alerte:"OK",fonds:[]},
   {startup:"Clearfashion",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-10",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Urbyn",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
-  {startup:"WeeFin",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"WeeFin",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Argile",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
   {startup:"Caeli Energie",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
-  {startup:"Carbone Farmers",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Carbone Farmers",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Onima",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Diamfab",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-17",format:"Format non respecté",alerte:"Retard",fonds:["F1", "F1R"]},
   {startup:"Darwin",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-16",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
   {startup:"Circul'Egg",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-05",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Ramdam Social",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-18",format:"Format respecté",alerte:"Retard",fonds:["F1"]},
-  {startup:"Bubble Robotics",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Bubble Robotics",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Orus Energy",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-16",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
-  {startup:"Mongalet",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"EverDye",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-15",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
+  {startup:"Mongalet",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
+  {startup:"EverDye",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-15",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Bocoloco",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-11-13",format:"Format non respecté",alerte:"OK",fonds:["F1"]},
   {startup:"Edonia",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-08",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"All Colibri",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-11",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Qomon",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Keenat",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Dotomics",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Dotomics",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale", "F3 Inception", "F3R"]},
   {startup:"Klaro",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-15",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Fungu'it",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-11-13",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Enrise",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2026-01-16",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
   {startup:"Aptimiz",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-16",format:"Format respecté",alerte:"Retard",fonds:["F1"]},
-  {startup:"Spark",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"Spark",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F3 Scale"]},
   {startup:"Bon dimanche",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Billiv",mois:"2025-11-01",moisLabel:"Novembre 2025",date:"2025-12-15",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Fungu'it",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-06",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Aptimiz",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-16",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
-  {startup:"Bubble Robotics",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Bubble Robotics",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Billiv",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-27",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
   {startup:"Keenat",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-14",format:"Format non respecté",alerte:"OK",fonds:[]},
   {startup:"Orus Energy",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-19",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
-  {startup:"EverDye",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-08",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
-  {startup:"Dotomics",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-27",format:"Format non respecté",alerte:"Retard",fonds:[]},
+  {startup:"EverDye",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-08",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R", "F3 Scale"]},
+  {startup:"Dotomics",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-27",format:"Format non respecté",alerte:"Retard",fonds:["F3 Scale", "F3 Inception", "F3R"]},
   {startup:"Clearfashion",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-15",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Argile",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2025-12-23",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
   {startup:"Qomon",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Onima",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Darwin",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-20",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
-  {startup:"Carbone Farmers",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-12",format:"Format non respecté",alerte:"OK",fonds:[]},
+  {startup:"Carbone Farmers",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-12",format:"Format non respecté",alerte:"OK",fonds:["F3 Scale"]},
   {startup:"Enrise",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
   {startup:"Diamfab",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Urbyn",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-23",format:"Format respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Ramdam Social",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2025-12-18",format:"Format respecté",alerte:"OK",fonds:["F1"]},
   {startup:"All Colibri",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-15",format:"Format non respecté",alerte:"OK",fonds:[]},
-  {startup:"WeeFin",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-27",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
+  {startup:"WeeFin",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-27",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Bocoloco",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-02-02",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Circul'Egg",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-09",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Edonia",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Klaro",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"2026-01-19",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
-  {startup:"Spark",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"Spark",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F3 Scale"]},
   {startup:"Bon dimanche",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Mongalet",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Bubble Robotics",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Mongalet",mois:"2025-12-01",moisLabel:"Décembre 2025",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
+  {startup:"Bubble Robotics",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Bocoloco",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-02",format:"Format non respecté",alerte:"OK",fonds:["F1"]},
   {startup:"Ramdam Social",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-24",format:"Format respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Clearfashion",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-13",format:"Format respecté",alerte:"OK",fonds:[]},
-  {startup:"Carbone Farmers",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Carbone Farmers",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Urbyn",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
-  {startup:"EverDye",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
-  {startup:"Mongalet",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-02",format:"Format non respecté",alerte:"OK",fonds:[]},
+  {startup:"EverDye",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
+  {startup:"Mongalet",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-02",format:"Format non respecté",alerte:"OK",fonds:["F3 Scale"]},
   {startup:"Circul'Egg",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-05",format:"Format non respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Onima",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"WeeFin",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"WeeFin",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Keenat",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Bon dimanche",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-03-11",format:"Format respecté",alerte:"Retard",fonds:[]},
   {startup:"Billiv",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-20",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
@@ -732,42 +753,42 @@ const NL_DETAIL = [
   {startup:"Edonia",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-03",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Aptimiz",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-16",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
   {startup:"Enrise",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-18",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
-  {startup:"Futurail",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Futurail",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale", "F3 Inception", "F3R"]},
   {startup:"Qomon",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
-  {startup:"Dotomics",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-23",format:"Format non respecté",alerte:"Retard",fonds:[]},
+  {startup:"Dotomics",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-23",format:"Format non respecté",alerte:"Retard",fonds:["F3 Scale", "F3 Inception", "F3R"]},
   {startup:"Klaro",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-16",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
   {startup:"All Colibri",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-09",format:"Format non respecté",alerte:"OK",fonds:[]},
   {startup:"Orus Energy",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-16",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
-  {startup:"Spark",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-05",format:"Format respecté",alerte:"OK",fonds:["F1"]},
-  {startup:"Nelson",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-01",format:"Format respecté",alerte:"OK",fonds:[]},
-  {startup:"Mongalet",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Spark",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-05",format:"Format respecté",alerte:"OK",fonds:["F1", "F3 Scale"]},
+  {startup:"Nelson",mois:"2026-01-01",moisLabel:"Janvier 2026",date:"2026-02-01",format:"Format respecté",alerte:"OK",fonds:["F3R"]},
+  {startup:"Mongalet",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Bon dimanche",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-11",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Keenat",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Onima",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-17",format:"Format non respecté",alerte:"Retard",fonds:[]},
   {startup:"Fungu'it",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-26",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
   {startup:"Qomon",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Bocoloco",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
-  {startup:"EverDye",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"EverDye",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Orus Energy",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-18",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
   {startup:"Argile",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
   {startup:"Billiv",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
-  {startup:"Futurail",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-03",format:"Format respecté",alerte:"OK",fonds:[]},
+  {startup:"Futurail",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-03",format:"Format respecté",alerte:"OK",fonds:["F3 Scale", "F3 Inception", "F3R"]},
   {startup:"Edonia",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-09",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"Circul'Egg",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-04",format:"Format respecté",alerte:"OK",fonds:["F1", "F1R"]},
   {startup:"All Colibri",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Klaro",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-16",format:"Format respecté",alerte:"Retard",fonds:["F1", "F1R"]},
-  {startup:"Bubble Robotics",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Carbone Farmers",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Bubble Robotics",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
+  {startup:"Carbone Farmers",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Diamfab",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
   {startup:"Living Models",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-18",format:"Format non respecté",alerte:"Retard",fonds:[]},
   {startup:"Urbyn",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
   {startup:"Ramdam Social",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-23",format:"Format respecté",alerte:"Retard",fonds:["F1"]},
-  {startup:"WeeFin",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R"]},
+  {startup:"WeeFin",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Clearfashion",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-10",format:"Format respecté",alerte:"OK",fonds:[]},
   {startup:"Darwin",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-10",format:"Format respecté",alerte:"OK",fonds:["F1R"]},
-  {startup:"Nelson",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-03",format:"Format respecté",alerte:"OK",fonds:[]},
+  {startup:"Nelson",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-03",format:"Format respecté",alerte:"OK",fonds:["F3R"]},
   {startup:"Aptimiz",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-16",format:"Format non respecté",alerte:"Retard",fonds:["F1"]},
-  {startup:"Spark",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"Spark",mois:"2026-02-01",moisLabel:"Février 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F3 Scale"]},
   {startup:"Enrise",mois:"2026-02-01",moisLabel:"Février 2026",date:"2026-03-19",format:"Format respecté",alerte:"Retard",fonds:["F1R"]},
   {startup:"All Colibri",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Aptimiz",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
@@ -775,29 +796,29 @@ const NL_DETAIL = [
   {startup:"Billiv",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
   {startup:"Bocoloco",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
   {startup:"Bon dimanche",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Bubble Robotics",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Carbone Farmers",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Bubble Robotics",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
+  {startup:"Carbone Farmers",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Circul'Egg",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
   {startup:"Clearfashion",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Darwin",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
   {startup:"Diamfab",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
   {startup:"Edonia",mois:"2026-03-01",moisLabel:"Mars 2026",date:"2026-04-03",format:"—",alerte:"OK",fonds:["F1","F1R"]},
   {startup:"Enrise",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
-  {startup:"EverDye",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
+  {startup:"EverDye",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
   {startup:"Fungu'it",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1R"]},
-  {startup:"Futurail",mois:"2026-03-01",moisLabel:"Mars 2026",date:"2026-04-02",format:"—",alerte:"OK",fonds:[]},
-  {startup:"Mongalet",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Futurail",mois:"2026-03-01",moisLabel:"Mars 2026",date:"2026-04-02",format:"—",alerte:"OK",fonds:["F3 Scale", "F3 Inception", "F3R"]},
+  {startup:"Mongalet",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3 Scale"]},
   {startup:"Keenat",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Klaro",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
   {startup:"Living Models",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
-  {startup:"Nelson",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
+  {startup:"Nelson",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F3R"]},
   {startup:"Onima",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:[]},
   {startup:"Orus Energy",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
   {startup:"Qomon",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
   {startup:"Ramdam Social",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
-  {startup:"Spark",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
+  {startup:"Spark",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F3 Scale"]},
   {startup:"Urbyn",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1"]},
-  {startup:"WeeFin",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1","F1R"]},
+  {startup:"WeeFin",mois:"2026-03-01",moisLabel:"Mars 2026",date:"—",format:"—",alerte:"Non reçue",fonds:["F1", "F1R", "F3 Scale"]},
 ];
 
 const EVENTS = [
@@ -893,7 +914,7 @@ function renderOverview() {
   );
 
   mkChart('ov-em','doughnut',
-    ['✅ Obtenu','🟡 En cours','⏳ À compléter','🚨 Dépassée'],
+    ['✅ Obtenu','🟡 En cours','⏳ A encore le temps','🚨 Dépassée'],
     [{data:[15,6,6,4],
       backgroundColor:['#22C55E','#EAB308','#E8590C','#EF4444'],
       borderWidth:2,borderColor:'#0d0d0d'}],
@@ -931,11 +952,14 @@ function renderCommercial() {
   );
   mkChart('comm-mois','bar',
     COMMERCIAL.byMois.map(r=>r.m),
-    [{label:'Dossiers',data:COMMERCIAL.byMois.map(r=>r.n),
-      backgroundColor:'rgba(232,89,12,0.75)',borderRadius:5,borderSkipped:false}],
-    {plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#1a1a1a'}},x:{grid:{display:false},ticks:{maxRotation:45}}}}
+    [
+      {label:'Blurb envoyé',data:COMMERCIAL.byMois.map(r=>r.blurb),backgroundColor:'rgba(107,63,160,0.85)',borderRadius:0,borderSkipped:false},
+      {label:'Intro directe',data:COMMERCIAL.byMois.map(r=>r.intro),backgroundColor:'rgba(232,89,12,0.85)',borderRadius:5,borderSkipped:false}
+    ],
+    {plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:11,padding:12,color:'#888'}}},scales:{y:{beginAtZero:true,stacked:true,grid:{color:'#1a1a1a'}},x:{stacked:true,grid:{display:false},ticks:{maxRotation:45}}}}
   );
   renderHBars('comm-top', COMMERCIAL.byStartup, '#E8590C');
+  renderHBars('comm-referent', COMMERCIAL.byReferent, '#22C55E');
 }
 
 // ─────────────────────────────────────────
@@ -1108,7 +1132,7 @@ function filterEvents() {
 // ─────────────────────────────────────────
 function renderBoard() {
   mkChart('em-pie','doughnut',
-    ['✅ Obtenu','🟡 En cours','⏳ À compléter','🚨 Dépassée'],
+    ['✅ Obtenu','🟡 En cours','⏳ A encore le temps','🚨 Dépassée'],
     [{data:[15,6,6,4],backgroundColor:['#22C55E','#EAB308','#E8590C','#EF4444'],borderWidth:2,borderColor:'#0d0d0d'}],
     {cutout:'65%'}
   );
@@ -1120,7 +1144,7 @@ function renderBoard() {
   const statutPill  = {
     '✅':'<span class="pill pill-ok">Obtenu</span>',
     '🟡':'<span class="pill pill-warn">En cours</span>',
-    '⏳':'<span class="pill pill-orange">À compléter</span>',
+    '⏳':'<span class="pill pill-orange">A encore le temps</span>',
     '🚨':'<span class="pill pill-err">Dépassée</span>',
   };
   // Grouper par statut
@@ -1128,7 +1152,7 @@ function renderBoard() {
   const statutTitle = {
     '✅':'Statut obtenu',
     '🟡':'En cours',
-    '⏳':'À compléter',
+    '⏳':'A encore le temps',
     '🚨':'Échéance dépassée',
   };
   const statutColor = {'✅':'var(--green)','🟡':'var(--yellow)','⏳':'var(--orange)','🚨':'var(--red)'};
